@@ -1,0 +1,1 @@
+wscript.exe "path of \dehi.vbs, this script hides cmd" "python path python script path"

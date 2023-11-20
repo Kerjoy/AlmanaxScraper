@@ -1,0 +1,8 @@
+discord
+urllib3
+regex
+datetime
+beautifulsoup4
+requests
+lxml
+asyncio
