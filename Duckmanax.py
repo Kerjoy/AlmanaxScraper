@@ -22,7 +22,7 @@ async def ayuda(ctx):
 	mensaje.add_field(name="Busca en los dias de almanax: ", value="-balmanax ObjetoBuscar(Puede ser una cosa, zona etc, solo 1 palabra se buscara en toda la pagina.)", inline=False)
 	mensaje.add_field(name="Almanax actual: ", value="-almanax", inline=False)
 	mensaje.add_field(name="Almanax actualizado diario: ", value="Se envia puntualmente, automaticamente sin comandos.", inline=False)
-	await ctx.send(embed = mensaje)
+	await ctx.send(embed = mensaje) 
 
 	print("Envio de ayuda finalizada")
 
