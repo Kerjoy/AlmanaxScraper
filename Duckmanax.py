@@ -12,7 +12,10 @@ bot = commands.Bot(command_prefix='-', description= "Este es un DuckBot, al serv
 sourceLinkAlmanax = 'http://www.krosmoz.com/es/almanax'
 horaServidor = 16
 minServidor = 1
-token_access_discord = ''
+Tok_file = "TokenDis.txt"
+
+with open(Tok_file, 'r') as file:
+    token_access_discord = file.read().strip()
 
 @bot.command()
 async def ayuda(ctx):
@@ -22,7 +25,8 @@ async def ayuda(ctx):
 	mensaje.add_field(name="Busca en los dias de almanax: ", value="-balmanax ObjetoBuscar(Puede ser una cosa, zona etc, solo 1 palabra se buscara en toda la pagina.)", inline=False)
 	mensaje.add_field(name="Almanax actual: ", value="-almanax", inline=False)
 	mensaje.add_field(name="Almanax actualizado diario: ", value="Se envia puntualmente, automaticamente sin comandos.", inline=False)
-	await ctx.send(embed = mensaje) 
+	await ctx.send(embed = mensaje)
+ obnsdkjasdkljasdklasdkaj
 
 	print("Envio de ayuda finalizada")
 
