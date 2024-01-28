@@ -7,14 +7,15 @@ from bs4 import BeautifulSoup
 import requests
 import asyncio
 
-intents = discord.Intents.all() 
-bot = commands.Bot(command_prefix='-', description= "Este es un DuckBot, al servicio del gremio",intents=intents)
+intent = discord.Intents.default()
+bot = commands.Bot(command_prefix='-', description= "Este es un DuckBot, al servicio del gremio",intents=intent)
 
 sourceLinkAlmanax = 'http://www.krosmoz.com/es/almanax'
-localdb = r"D:\Users\GCSLAYER\Documents\Proyectos\Duckmanax-master\info.txt"
 horaServidor = 16
 minServidor = 1
-token_access_discord = 'NzA5NTU2NjE1MDY5ODI3MDgz.Gq7kJ3.qqRtgJZiMuhfekoj9-L6eyA_1Isu5aUQXGeFPM'
+
+with open('TokenDis.txt', 'r') as file:
+    token_access_discord = file.read().strip()
 
 @bot.command()
 async def ayuda(ctx):
@@ -136,21 +137,21 @@ async def on_message(ctx):
 @bot.event
 async def on_ready():
 	print("Bot listo")
-	await bot.change_presence(activity=discord.Streaming(name="-ayuda",url="https://www.twitch.tv/kerdrai"))
+	await bot.change_presence(activity=discord.Streaming(name="-ayuda",url="url twitch chanel"))
 
 	while 1:
 
 		await asyncio.sleep(1)
 		fechaDailyAlmanax = datetime.datetime.now()
 
-		info = open(localdb,'r')
+		info = open (r"path for save status of daily msg almanax",'r')
 		flagIOE = info.read()
 		flagOE = int(flagIOE)
 		print("Hora actual:", fechaDailyAlmanax.hour, ":", fechaDailyAlmanax.minute, " Token OE: ", flagOE)
 		info.close()
 
 		if fechaDailyAlmanax.hour >= horaServidor and fechaDailyAlmanax.minute >= 1 and fechaDailyAlmanax.minute <= minServidor and flagOE == 0:
-			info = open (localdb,'w')
+			info = open (r"path for save status of daily msg almanax",'w')
 			info.write("1")
 			info.close()
 
@@ -184,7 +185,7 @@ async def on_ready():
 			print("Almanax automatico enviado")
 
 		if fechaDailyAlmanax.hour >= 0 and fechaDailyAlmanax.hour < horaServidor and flagOE == 1:
-			info = open (localdb,'w')
+			info = open (r"info.txt",'w')
 			info.write("0")
 			info.close()
 			print ("Reseteo de mensaje de almanax automatico")
