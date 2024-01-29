@@ -7,15 +7,22 @@ from bs4 import BeautifulSoup
 import requests
 import asyncio
 
-bot = commands.Bot(command_prefix='-', description= "Este es un DuckBot, al servicio del gremio")
+intents = discord.Intents.all()
+intents.members = True
+intents.typing = True
+intents.presences = True
+bot = commands.Bot(command_prefix='-', description= "Este es un DuckBot, al servicio del gremio", intents=intents)
 
 sourceLinkAlmanax = 'http://www.krosmoz.com/es/almanax'
 horaServidor = 16
 minServidor = 1
 Tok_file = "TokenDis.txt"
+file_path = "info.txt"
 
 with open(Tok_file, 'r') as file:
     token_access_discord = file.read().strip()
+    file.close()
+print(token_access_discord)
 
 @bot.command()
 async def ayuda(ctx):
@@ -26,7 +33,6 @@ async def ayuda(ctx):
 	mensaje.add_field(name="Almanax actual: ", value="-almanax", inline=False)
 	mensaje.add_field(name="Almanax actualizado diario: ", value="Se envia puntualmente, automaticamente sin comandos.", inline=False)
 	await ctx.send(embed = mensaje)
- obnsdkjasdkljasdklasdkaj
 
 	print("Envio de ayuda finalizada")
 
@@ -138,14 +144,14 @@ async def on_message(ctx):
 @bot.event
 async def on_ready():
 	print("Bot listo")
-	await bot.change_presence(activity=discord.Streaming(name="-ayuda",url="url twitch chanel"))
+	await bot.change_presence(activity=discord.Game(name="-ayuda"))
 
 	while 1:
 
 		await asyncio.sleep(1)
 		fechaDailyAlmanax = datetime.datetime.now()
 
-		info = open (r"path for save status of daily msg almanax",'r')
+		info = open (file_path,'r')
 		flagIOE = info.read()
 		flagOE = int(flagIOE)
 		print("Hora actual:", fechaDailyAlmanax.hour, ":", fechaDailyAlmanax.minute, " Token OE: ", flagOE)
@@ -180,13 +186,13 @@ async def on_ready():
 			mensaje.add_field(name="Vuela entre las nubes despidiéndose: ", value="Que tengan un patastico dia @everyone", inline=False)
 			mensaje.set_image(url=linkImagen)
 
-			channel = bot.get_channel(709556171148623952)
+			channel = bot.get_channel(1201328339164602491)
 			await channel.send(embed = mensaje)
 
 			print("Almanax automatico enviado")
 
 		if fechaDailyAlmanax.hour >= 0 and fechaDailyAlmanax.hour < horaServidor and flagOE == 1:
-			info = open (r"path for save status of daily msg almanax",'w')
+			info = open (file_path,'w')
 			info.write("0")
 			info.close()
 			print ("Reseteo de mensaje de almanax automatico")
