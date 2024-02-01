@@ -13,6 +13,7 @@ intents.typing = True
 intents.presences = True
 bot = commands.Bot(command_prefix='-', description= "Este es un DuckBot, al servicio del gremio", intents=intents)
 
+#dont work, webpage blocking requests
 sourceLinkAlmanax = 'http://www.krosmoz.com/es/almanax'
 horaServidor = 16
 minServidor = 1
